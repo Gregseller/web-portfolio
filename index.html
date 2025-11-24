@@ -1,111 +1,368 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gregory Grosfirer – Portfolio</title>
+    <title>Gregory Grosfirer - Web Manager for Work Exchange</title>
     <style>
+        :root {
+            --primary: #00ffe1;
+            --dark-bg: #0f172a;
+            --darker-bg: #020617;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #111;
-            color: #f0f0f0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            color: var(--text);
             line-height: 1.6;
-            padding: 2rem;
+            padding: 1rem;
+            min-height: 100vh;
         }
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        h1, h2 {
-            color: #00ffe1;
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
         }
-        .tags span {
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), #00ffaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cta-button {
             display: inline-block;
-            background-color: #222;
-            color: #ccc;
-            padding: 0.3em 0.6em;
-            margin: 0.2em;
-            border-radius: 4px;
-            font-size: 0.9em;
+            background: var(--primary);
+            color: var(--darker-bg);
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        ul {
-            list-style-type: "🟢 ";
-            padding-left: 1.5em;
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 225, 0.3);
         }
         .section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
-        .contact p {
-            margin: 0.3em 0;
+        h2 {
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-top: 2rem;
+        }
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .offer-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .offer-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--darker-bg);
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .contact-links a {
+            color: var(--primary);
+            text-decoration: none;
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .contact-links a:hover {
+            background: var(--primary);
+            color: var(--darker-bg);
         }
         footer {
-            margin-top: 3rem;
             text-align: center;
-            color: #555;
-            font-size: 0.9em;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-links a {
+                width: 200px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Gregory Grosfirer</h1>
-        <div class="section">
-            <strong>Role:</strong> Web Project Manager & AI Assistant<br>
-            <strong>Location:</strong> Currently Latin America (open to relocation)<br>
-            <strong>Languages:</strong> English, Russian, Spanish (learning)
-        </div>
-
-        <div class="section">
-            <h2>What I Do</h2>
-            <p>I help small projects, farms, and independent hosts build or improve their digital presence using simple and maintainable tools. I specialize in:</p>
-            <div class="tags">
-                <span>Static Sites</span><span>Markdown</span><span>Hugo</span><span>Netlify</span>
-                <span>WordPress</span><span>GitHub Pages</span><span>HTML/CSS</span>
-                <span>AI-powered Content Tools</span>
+        <div class="header">
+            <h1>Web Manager for Work Exchange</h1>
+            <p class="tagline">I build & fix websites for hosts in exchange for accommodation</p>
+            
+            <div class="cta-box">
+                <h2 style="margin-top: 0; color: white;">Your New Website in <strong>48 Hours</strong></h2>
+                <p style="color: #e0f2fe; margin-bottom: 1.5rem;">Stop struggling with your outdated website. I'll build you a fast, modern site you can actually manage.</p>
+                <a href="mailto:gregorygrosfirer@gmail.com?subject=Web%20Exchange%20Opportunity" class="cta-button">📧 Get Your Free Website</a>
+                <a href="https://t.me/grosgres" class="cta-button" style="background: transparent; color: var(--primary); border: 2px solid var(--primary);">💬 Message on Telegram</a>
             </div>
         </div>
 
         <div class="section">
-            <h2>Why Work With Me</h2>
+            <h2>What I Offer</h2>
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <h3>🚀 Website in 48h</h3>
+                    <p>From idea to live website in two days. Modern, mobile-friendly, and easy to update.</p>
+                </div>
+                <div class="offer-card">
+                    <h3>🛠️ Fix & Improve</h3>
+                    <p>Your existing site is slow or broken? I'll make it fast and functional again.</p>
+                </div>
+                <div class="offer-card">
+                    <h3>📝 Content + SEO</h3>
+                    <p>I'll help with text, images, and basic SEO so guests can actually find you.</p>
+                </div>
+                <div class="offer-card">
+                    <h3>🎓 You Can Manage It</h3>
+                    <p>I use simple tools and teach you how to make basic updates yourself.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>My Web-Stack</h2>
+            <p>I use reliable, easy-to-maintain technology:</p>
+            <div style="margin: 1.5rem 0;">
+                <span class="badge">HTML/CSS</span>
+                <span class="badge">JavaScript</span>
+                <span class="badge">Hugo</span>
+                <span class="badge">GitHub Pages</span>
+                <span class="badge">Netlify</span>
+                <span class="badge">WordPress</span>
+                <span class="badge">AI Tools</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Why Choose This Exchange</h2>
             <ul>
-                <li>I deliver fast — usually within days.</li>
-                <li>I use AI to assist with copywriting, SEO, translations.</li>
-                <li>I work with simple tech stacks that are easy to maintain.</li>
-                <li>I have deep learning experience and think like a systems engineer.</li>
+                <li><strong>Zero Cost:</strong> You get a professional website without paying cash</li>
+                <li><strong>Fast Results:</strong> Most projects completed within 2-3 days</li>
+                <li><strong>4 Hours/Day:</strong> I work on your site while respecting your house rules</li>
+                <li><strong>Easy Maintenance:</strong> I set up systems you can manage yourself</li>
+                <li><strong>Multi-language:</strong> I can help with English, Russian, Spanish content</li>
             </ul>
         </div>
 
         <div class="section">
-            <h2>Example Projects</h2>
+            <h2>Recent Examples</h2>
             <ul>
-                <li><strong>Trading Dashboard UI</strong> — built real-time visualizer for a rainforest learning agent</li>
-                <li><strong>Minimalist site for Eco-hostel</strong> — Hugo + Markdown + Git + Netlify</li>
-                <li><strong>Multilingual Info Page</strong> — integrated AI translation into static site</li>
+                <li><strong>Eco-Hostel Website:</strong> Hugo + Markdown site deployed in 2 days</li>
+                <li><strong>Trading Dashboard:</strong> Real-time data visualization UI</li>
+                <li><strong>Multilingual Info Page:</strong> One site, three languages using AI translation</li>
+                <li><strong>Website Rescue:</strong> Fixed broken WordPress site and trained staff</li>
             </ul>
         </div>
 
         <div class="section">
-            <h2>Next Steps</h2>
-            <p>I’m available immediately for volunteer opportunities in Latin America (or globally) where I can help with:</p>
-            <ul>
-                <li>building or fixing a website</li>
-                <li>helping with digital guestbooks, booking, or blog</li>
-                <li>combining on-site help with online tools</li>
-            </ul>
-        </div>
+            <h2>Ready to Upgrade Your Website?</h2>
+            <p>I'm available immediately for Work Exchange opportunities worldwide. Let's discuss how I can help your project!</p>
+            
+            <div class="contact-links">
+                <a href="mailto:gregorygrosfirer@gmail.com">📧 Email Me</a>
+                <a href="https://t.me/grosgres">💬 Telegram</a>
+                <a href="tel:+972535307053">📞 Call/WhatsApp</a>
+            </div>
 
-        <div class="section contact">
-            <h2>Contact</h2>
-            <p>Email: gregorygrosfirer@gmail.com</p>
-            <p>Phone/WhatsApp: +972-535-307-053</p>
-            <p>Telegram: @grosgres</p>
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 225, 0.1); border-radius: 8px;">
+                <p style="margin: 0;"><strong>Next Step:</strong> Send me a message with your current website (or idea) and let's schedule a quick chat!</p>
+            </div>
         </div>
 
         <footer>
-            &copy; 2025 Gregory Grosfirer
+            <p>Gregory Grosfirer | Web Manager & Digital Nomad</p>
+            <p>📍 Currently in Latin America | 🌍 Open to relocation</p>
+            <p>🔄 Available for Work Exchange via Workaway, Worldpackers, or direct arrangements</p>
         </footer>
     </div>
 </body>
 </html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gregory Grosfirer — Web Manager & AI Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #222;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #0a0a0a;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .tag {
+      display: inline-block;
+      background: #ddd;
+      padding: 2px 6px;
+      margin: 2px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gregory Grosfirer</h1>
+    <p><strong>Role:</strong> Web Project Manager & AI Assistant<br>
+       <strong>Location:</strong> Currently Latin America (open to relocation)<br>
+       <strong>Languages:</strong> English, Russian, Spanish (learning)</p>
+
+    <div class="section">
+      <h2>What I Do</h2>
+      <p>I help small projects, farms, and independent hosts build or improve their digital presence using simple and maintainable tools. I specialize in:</p>
+      <div>
+        <span class="tag">Static Sites</span>
+        <span class="tag">Markdown</span>
+        <span class="tag">Hugo</span>
+        <span class="tag">Netlify</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">GitHub Pages</span>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">AI-powered Content Tools</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Why Work With Me</h2>
+      <ul>
+        <li>📦 I deliver fast — usually within days.</li>
+        <li>🤖 I use AI to assist with copywriting, SEO, translations.</li>
+        <li>🛠️ I work with simple tech stacks that are easy to maintain.</li>
+        <li>🧠 I have deep learning experience and think like a systems engineer.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Example Projects</h2>
+      <ul>
+        <li><strong>Trading Dashboard UI</strong> — built real-time visualizer for a reinforcement learning agent</li>
+        <li><strong>Minimalist Site for Eco-hostel</strong> — Hugo + Markdown + Git + Netlify</li>
+        <li><strong>Multilingual Info Pages</strong> — integrated AI translation into static sites</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Next Steps</h2>
+      <p>I’m available immediately for volunteer opportunities in Latin America (or globally) where I can help with:</p>
+      <ul>
+        <li>🔧 building or fixing a website</li>
+        <li>🌱 helping with digital guestbook, booking, or blog</li>
+        <li>🤝 combining on-site help with online tools</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Contact</h2>
+      <p>Email: gregory.grosfirer@gmail.com<br>
+         Phone/WhatsApp: +972-535-307-053<br>
+         Telegram: @greggros</p>
+    </div>
+  </div>
+</body>
+</html> -->
